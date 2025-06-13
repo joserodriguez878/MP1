@@ -1,116 +1,128 @@
-<!DOCTYPE html><html lang="es">
+<!DOCTYPE html>
+<html lang="es">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>¿Quieres ser mi novia?</title>
   <style>
     body {
       margin: 0;
-      font-family: 'Arial', sans-serif;
-      background: linear-gradient(to right, #ffb6c1, #ffe4e1);
+      font-family: 'Comic Sans MS', cursive;
+      background: linear-gradient(to right, #ffc0cb, #ffb6c1);
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
       height: 100vh;
       overflow: hidden;
+    }
+    .heart {
+      width: 100px;
+      height: 90px;
+      background-color: red;
+      position: relative;
+      transform: rotate(-45deg);
+      animation: heartbeat 1s infinite;
+    }
+    .heart::before,
+    .heart::after {
+      content: "";
+      width: 100px;
+      height: 90px;
+      background-color: red;
+      border-radius: 50%;
+      position: absolute;
+    }
+    .heart::before {
+      top: -50px;
+      left: 0;
+    }
+    .heart::after {
+      left: 50px;
+      top: 0;
+    }
+    @keyframes heartbeat {
+      0%, 100% {
+        transform: scale(1) rotate(-45deg);
+      }
+      50% {
+        transform: scale(1.2) rotate(-45deg);
+      }
+    }
+    h1 {
+      color: white;
+      font-size: 2.5em;
       text-align: center;
-    }h1 {
-  font-size: 2.5rem;
-  color: #d6336c;
-  margin-bottom: 2rem;
-}
+      margin-top: 20px;
+    }
+  .btn-container {
+    margin-top: 30px;
+    position: relative;
+    height: 80px;
+    width: 300px;
+  }
 
-.heart {
-  width: 100px;
-  height: 90px;
-  position: relative;
-  margin: 20px auto;
-  animation: beat 1s infinite;
-}
+  button {
+    font-size: 1.5em;
+    padding: 10px 20px;
+    width: 130px;
+    border: none;
+    border-radius: 10px;
+    margin: 10px;
+    cursor: pointer;
+    transition: all 0.3s;
+    position: absolute;
+  }
 
-.heart::before,
-.heart::after {
-  content: "";
-  position: absolute;
-  top: 0;
-  width: 100px;
-  height: 90px;
-  background: red;
-  border-radius: 50px 50px 0 0;
-}
+  .yes {
+    background-color: #4CAF50;
+    color: white;
+    left: 0;
+    top: 0;
+  }
 
-.heart::before {
-  left: 50px;
-  transform: rotate(-45deg);
-  transform-origin: 0 100%;
-}
-
-.heart::after {
-  left: 0;
-  transform: rotate(45deg);
-  transform-origin: 100% 100%;
-}
-
-@keyframes beat {
-  0%, 100% { transform: scale(1); }
-  50% { transform: scale(1.2); }
-}
-
-.buttons {
-  margin-top: 2rem;
-}
-
-button {
-  font-size: 1.2rem;
-  padding: 10px 20px;
-  margin: 10px;
-  border: none;
-  border-radius: 10px;
-  cursor: pointer;
-  transition: background 0.3s, transform 0.3s;
-}
-
-.yes {
-  background-color: #4caf50;
-  color: white;
-}
-
-.yes:hover {
-  background-color: #45a049;
-}
-
-.no {
-  background-color: #f44336;
-  color: white;
-  position: relative;
-}
-
-.no:hover {
-  background-color: #e53935;
-}
-
+  .no {
+    background-color: #f44336;
+    color: white;
+    left: 150px;
+    top: 0;
+  }
+    #respuesta {
+      margin-top: 20px;
+      font-size: 1.8em;
+      color: white;
+      text-align: center;
+      max-width: 90%;
+    }
   </style>
 </head>
 <body>
-  <h1>María Paula, princesita hermosa,<br>¿quieres ser mi novia?</h1>
   <div class="heart"></div>
-  <div class="buttons">
-    <button class="yes" onclick="respuestaSi()">Sí</button>
-    <button class="no" id="noBtn" onclick="respuestaNo()">No</button>
-  </div>  <script>
-    function respuestaSi() {
-      alert("Te quiero mucho, me haces muy feliz ❤️");
+  <h1>💖 Princesita hermosa 💖<br>María Paula, ¿Quieres ser mi novia? 🌹</h1>
+  <div class="btn-container">
+    <button class="yes" onclick="acepta()">💘 Sí </button>
+    <button class="no" id="noBtn" onclick="rechaza()">💔 No </button>
+  </div>
+  <div id="respuesta"></div>
+
+  <script>
+    function acepta() {
+      document.getElementById("respuesta").innerHTML = "🥰 Me haces muy feliz, te quiero mucho mi amor 💖💖💖";
     }
 
-    function respuestaNo() {
-      alert("Vuelve a intentarlo 😅");
-      const btn = document.getElementById("noBtn");
-      const x = Math.floor(Math.random() * (window.innerWidth - 100));
-      const y = Math.floor(Math.random() * (window.innerHeight - 100));
-      btn.style.position = "absolute";
-      btn.style.left = x + "px";
-      btn.style.top = y + "px";
+    function rechaza() {
+      document.getElementById("respuesta").innerHTML = "😢 Vuelve a intentar 😢";
+      moverBoton();
     }
-  </script></body>
+
+    function moverBoton() {
+      const noBtn = document.getElementById("noBtn");
+      const maxX = window.innerWidth - noBtn.offsetWidth;
+      const maxY = window.innerHeight - noBtn.offsetHeight - 100;
+      const randX = Math.random() * maxX;
+      const randY = Math.random() * maxY;
+      noBtn.style.left = randX + "px";
+      noBtn.style.top = randY + "px";
+    }
+  </script>
+</body>
 </html>
